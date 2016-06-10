@@ -66,6 +66,8 @@ public class MainActivityTest {
     public void loginButtonClickShowsNonNullToast(){
         MainActivity visibleActivty = getVisibleActivty();
         View button = visibleActivty.findViewById(R.id.login_button);
+        ShadowToast.reset();
+
         button.performClick();
 
         assertNotNull(ShadowToast.getTextOfLatestToast());
@@ -74,18 +76,16 @@ public class MainActivityTest {
     @Test
     public void loginButtonClickShowsToastWithLoginAndPassword(){
         MainActivity visibleActivty = getVisibleActivty();
-
         EditText loginInput = (EditText) visibleActivty.findViewById(R.id.login_input);
         loginInput.setText("userLogin");
-
         EditText passwordInput = (EditText) visibleActivty.findViewById(R.id.password_input);
         passwordInput.setText("userPassword");
-
         View button = visibleActivty.findViewById(R.id.login_button);
+        ShadowToast.reset();
+
         button.performClick();
 
         assertEquals("userLogin userPassword",ShadowToast.getTextOfLatestToast());
-
     }
 
     private MainActivity getVisibleActivty() {
