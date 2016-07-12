@@ -13,7 +13,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
-import static org.hamcrest.core.IsEqual.equalTo;
 import static org.junit.Assert.*;
 
 /**
@@ -21,13 +20,13 @@ import static org.junit.Assert.*;
  */
 @RunWith(RobolectricGradleTestRunner.class)
 @Config(constants = BuildConfig.class)
-public class MainActivityTest {
+public class LoginActivityTest {
 
-    ActivityController<MainActivity> activityController;
+    ActivityController<LoginActivity> activityController;
 
     @Before
     public void prepareForTest(){
-        activityController= Robolectric.buildActivity(MainActivity.class);
+        activityController= Robolectric.buildActivity(LoginActivity.class);
     }
 
     @Test
@@ -37,7 +36,7 @@ public class MainActivityTest {
 
     @Test
     public void activtyHasButtonWithLoginText(){
-        MainActivity activity = getVisibleActivty();
+        LoginActivity activity = getVisibleActivty();
         Button button= (Button) activity.findViewById(R.id.login_button);
 
         assertEquals(View.VISIBLE,button.getVisibility());
@@ -46,7 +45,7 @@ public class MainActivityTest {
 
     @Test
     public void activtyHasLoginEditTextWithLoginHint(){
-        MainActivity activity = getVisibleActivty();
+        LoginActivity activity = getVisibleActivty();
         EditText editText= (EditText) activity.findViewById(R.id.login_input );
 
         assertEquals(View.VISIBLE,editText.getVisibility());
@@ -55,7 +54,7 @@ public class MainActivityTest {
 
     @Test
     public void activityHasPasswordEditTestWithPasswordHint(){
-        MainActivity activity=getVisibleActivty();
+        LoginActivity activity=getVisibleActivty();
         EditText editText= (EditText) activity.findViewById(R.id.password_input);
 
         assertEquals(View.VISIBLE,editText.getVisibility());
@@ -64,7 +63,7 @@ public class MainActivityTest {
 
     @Test
     public void loginButtonClickShowsNonNullToast(){
-        MainActivity visibleActivty = getVisibleActivty();
+        LoginActivity visibleActivty = getVisibleActivty();
         View button = visibleActivty.findViewById(R.id.login_button);
         ShadowToast.reset();
 
@@ -75,7 +74,7 @@ public class MainActivityTest {
 
     @Test
     public void loginButtonClickShowsToastWithLoginAndPassword(){
-        MainActivity visibleActivty = getVisibleActivty();
+        LoginActivity visibleActivty = getVisibleActivty();
         EditText loginInput = (EditText) visibleActivty.findViewById(R.id.login_input);
         loginInput.setText("userLogin");
         EditText passwordInput = (EditText) visibleActivty.findViewById(R.id.password_input);
@@ -88,7 +87,7 @@ public class MainActivityTest {
         assertEquals("userLogin userPassword",ShadowToast.getTextOfLatestToast());
     }
 
-    private MainActivity getVisibleActivty() {
+    private LoginActivity getVisibleActivty() {
         return activityController.create().start().resume().visible().get();
     }
 }
